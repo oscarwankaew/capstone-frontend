@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     indexEvents: function () {
-      axios.get("http://localhost:3000/events.json").then((response) => {
+      axios.get("/events.json").then((response) => {
         this.events = response.data;
         console.log("All events:", response.data);
       });
@@ -27,6 +27,11 @@ export default {
     <h1>{{ message }}</h1>
     <div v-for="event in events" v-bind:key="event.id">
       <h2>{{ event.title }}</h2>
+      <p>
+        <button>
+          <router-link v-bind:to="`/events/${event.id}`">Select</router-link>
+        </button>
+      </p>
       <img :src="event.event_image" v-bind:alt="event.title" />
       <h3>{{ event.date }}</h3>
       <h3>{{ event.time }}</h3>

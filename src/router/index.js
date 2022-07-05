@@ -3,6 +3,9 @@ import HomeView from "../views/HomeView.vue";
 import SignupView from "../views/SignupView.vue";
 import LoginView from "../views/LoginView.vue";
 import LogoutView from "../views/LogoutView.vue";
+import EventsShow from "../views/EventsShow.vue";
+import FightersIndex from "../views/FightersIndex.vue";
+import FightersShow from "../views/FightersShow.vue";
 
 const routes = [
   {
@@ -26,12 +29,19 @@ const routes = [
     component: LogoutView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/events/:id",
+    name: "events-show",
+    component: EventsShow,
+  },
+  {
+    path: "/fighters",
+    name: "fighters-index",
+    component: FightersIndex,
+  },
+  {
+    path: "/fighters/:id",
+    name: "fighters-show",
+    component: FightersShow,
   },
 ];
 
