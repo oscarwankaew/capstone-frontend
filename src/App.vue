@@ -4,6 +4,8 @@
     |
     <router-link to="/Fighters">Fighters</router-link>
     |
+    <router-link to="/users/:id">Profile</router-link>
+    |
     <router-link to="/signup">Signup</router-link>
     |
     <router-link to="/login">Login</router-link>

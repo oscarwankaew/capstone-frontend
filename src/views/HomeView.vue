@@ -29,13 +29,19 @@ export default {
       <h2>{{ event.title }}</h2>
       <p>
         <button>
-          <router-link v-bind:to="`/events/${event.id}`">Select</router-link>
+          <router-link v-bind:to="`/events/${event.id}`">Show</router-link>
         </button>
       </p>
       <img :src="event.event_image" v-bind:alt="event.title" />
       <h3>{{ event.date }}</h3>
       <h3>{{ event.time }}</h3>
       <h3>{{ event.location }}</h3>
+      <div v-for="link in event.live_streams" v-bind:key="link.id">
+        <h3>
+          Live stream link:
+          <a v-bind:href="link.url">{{ link.url }}</a>
+        </h3>
+      </div>
       <div v-for="fighter in event.fighters" v-bind:key="fighter.id">
         <img :src="fighter.image" v-bind:alt="fighter.name" />
         <p>{{ fighter.name }}</p>

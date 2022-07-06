@@ -13,7 +13,20 @@ export default {
       console.log("Show fighter", response.data);
     });
   },
-  methods: {},
+  methods: {
+    favoriteFighter: function () {
+      var params = { fighter_id: this.fighter.id };
+      axios
+        .post("/favorite_fighters", params)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          this.errorStatus = error.response.status;
+        });
+    },
+  },
 };
 </script>
 
@@ -31,6 +44,9 @@ export default {
     <p>Draw: {{ fighter.draw }}</p>
     <p>Organization: {{ fighter.organization }}</p>
   </div>
+  <p>
+    <button v-on:click="favoriteFighter()">Favorite</button>
+  </p>
   <p>
     <button>
       <router-link to="/fighters">Back</router-link>

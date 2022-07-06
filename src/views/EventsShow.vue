@@ -24,6 +24,12 @@ export default {
     <h3>{{ event.date }}</h3>
     <h3>{{ event.time }}</h3>
     <h3>{{ event.location }}</h3>
+    <div v-for="link in event.live_streams" v-bind:key="link.id">
+      <h3>
+        Live stream link:
+        <a href="{{ link.url }}">{{ link.url }}</a>
+      </h3>
+    </div>
     <div v-for="fighter in event.fighters" v-bind:key="fighter.id">
       <img :src="fighter.image" v-bind:alt="fighter.name" />
       <p>{{ fighter.name }}</p>
