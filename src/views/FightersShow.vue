@@ -20,6 +20,7 @@ export default {
         .post("/favorite_fighters.json", params)
         .then((response) => {
           console.log(response.data);
+          this.$router.push("/fighters");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

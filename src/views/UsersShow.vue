@@ -1,12 +1,11 @@
 <script>
 import axios from "axios";
-// import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
+import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
 
 export default {
   data: function () {
     return {
       user: {},
-      // favoriteFighters: [],
     };
   },
   created: function () {
@@ -19,14 +18,16 @@ export default {
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
-    destroyFighter: function () {
-      axios.delete("favorite_fighters/" + this.$route.params.id + ".json").then((response) => {
+    destroyFighter: function (fighterId) {
+      axios.delete("favorite_fighters/" + fighterId + ".json").then((response) => {
         console.log("Deleted favorite fighter", response.data);
+        this.$router.go();
       });
     },
-    // showTime: function () {
-    //   moment().format();
-    // },
+    showTime: function () {
+      const m = moment().tz("America/Los_Angeles").format();
+      console.log(m.toString());
+    },
   },
 };
 </script>
@@ -51,21 +52,20 @@ export default {
     <h3>{{ event.location }}</h3>
   </div>
   <h1>Favorites</h1>
-  <div v-for="fighter in user.favorite_fighters" v-bind:key="fighter.id">
-    <img :src="fighter.image" v-bind:alt="fighter.name" />
-    <p>{{ fighter.name }}</p>
-    <p>Age: {{ fighter.age }}</p>
-    <p>Height: {{ fighter.height }}</p>
-    <p>Weight: {{ fighter.weight }}</p>
-    <p>Reach: {{ fighter.reach }}</p>
-    <p>Stance: {{ fighter.stance }}</p>
-    <p>Win: {{ fighter.win }}</p>
-    <p>Loss: {{ fighter.loss }}</p>
-    <p>Draw: {{ fighter.draw }}</p>
-    <p>Organization: {{ fighter.organization }}</p>
-
+  <div v-for="favorite_fighter in user.favorite_fighters" v-bind:key="favorite_fighter.id">
+    <img :src="favorite_fighter.fighter.image" v-bind:alt="favorite_fighter.fighter.name" />
+    <p>{{ favorite_fighter.fighter.name }}</p>
+    <p>Age: {{ favorite_fighter.fighter.age }}</p>
+    <p>Height: {{ favorite_fighter.fighter.height }}</p>
+    <p>Weight: {{ favorite_fighter.fighter.weight }}</p>
+    <p>Reach: {{ favorite_fighter.fighter.reach }}</p>
+    <p>Stance: {{ favorite_fighter.fighter.stance }}</p>
+    <p>Win: {{ favorite_fighter.fighter.win }}</p>
+    <p>Loss: {{ favorite_fighter.fighter.loss }}</p>
+    <p>Draw: {{ favorite_fighter.fighter.draw }}</p>
+    <p>Organization: {{ favorite_fighter.fighter.organization }}</p>
     <p>
-      <button v-on:click="destroyFighter()">Delete</button>
+      <button v-on:click="destroyFighter(favorite_fighter.id)">Delete</button>
     </p>
   </div>
   <p>
