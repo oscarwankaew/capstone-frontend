@@ -17,7 +17,7 @@ export default {
     favoriteFighter: function () {
       var params = { fighter_id: this.fighter.id };
       axios
-        .post("/favorite_fighters", params)
+        .post("/favorite_fighters.json", params)
         .then((response) => {
           console.log(response.data);
         })

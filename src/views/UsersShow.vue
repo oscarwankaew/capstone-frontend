@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+// import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
 
 export default {
   data: function () {
@@ -18,6 +19,14 @@ export default {
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
+    destroyFighter: function () {
+      axios.delete("favorite_fighters/" + this.$route.params.id + ".json").then((response) => {
+        console.log("Deleted favorite fighter", response.data);
+      });
+    },
+    // showTime: function () {
+    //   moment().format();
+    // },
   },
 };
 </script>
@@ -54,11 +63,18 @@ export default {
     <p>Loss: {{ fighter.loss }}</p>
     <p>Draw: {{ fighter.draw }}</p>
     <p>Organization: {{ fighter.organization }}</p>
+
+    <p>
+      <button v-on:click="destroyFighter()">Delete</button>
+    </p>
   </div>
   <p>
     <button>
       <router-link to="/">Home</router-link>
     </button>
+  </p>
+  <p>
+    <button v-on:click="showTime()">click</button>
   </p>
 </template>
 

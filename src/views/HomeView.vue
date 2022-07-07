@@ -29,7 +29,7 @@ export default {
       <h2>{{ event.title }}</h2>
       <p>
         <button>
-          <router-link v-bind:to="`/events/${event.id}`">Show</router-link>
+          <router-link v-bind:to="`/events/${event.id}`">View event</router-link>
         </button>
       </p>
       <img :src="event.event_image" v-bind:alt="event.title" />
