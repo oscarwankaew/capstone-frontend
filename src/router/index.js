@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import SignupView from "../views/SignupView.vue";
 import LoginView from "../views/LoginView.vue";
 import LogoutView from "../views/LogoutView.vue";
+import EventsIndex from "../views/EventsIndex.vue";
 import EventsShow from "../views/EventsShow.vue";
 import FightersIndex from "../views/FightersIndex.vue";
 import FightersShow from "../views/FightersShow.vue";
@@ -28,6 +29,11 @@ const routes = [
     path: "/logout",
     name: "logout",
     component: LogoutView,
+  },
+  {
+    path: "/events",
+    name: "events-index",
+    component: EventsIndex,
   },
   {
     path: "/events/:id",

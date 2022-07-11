@@ -34,25 +34,52 @@ export default {
 <template>
   <div class="home">
     <img :src="fighter.image" v-bind:alt="fighter.name" />
-    <p>{{ fighter.name }}</p>
-    <p>Age: {{ fighter.age }}</p>
-    <p>Height: {{ fighter.height }}</p>
-    <p>Weight: {{ fighter.weight }}</p>
-    <p>Reach: {{ fighter.reach }}</p>
-    <p>Stance: {{ fighter.stance }}</p>
-    <p>Win: {{ fighter.win }}</p>
-    <p>Loss: {{ fighter.loss }}</p>
-    <p>Draw: {{ fighter.draw }}</p>
-    <p>Organization: {{ fighter.organization }}</p>
+    <div class="name">
+      <h2>{{ fighter.name }}</h2>
+    </div>
+    <div class="boxed">
+      <p>Age: {{ fighter.age }}</p>
+      <p>Height: {{ fighter.height }}</p>
+      <p>Weight: {{ fighter.weight }}</p>
+      <p>Reach: {{ fighter.reach }}</p>
+      <p>Stance: {{ fighter.stance }}</p>
+      <p>Win: {{ fighter.win }}</p>
+      <p>Loss: {{ fighter.loss }}</p>
+      <p>Draw: {{ fighter.draw }}</p>
+      <p>Organization: {{ fighter.organization }}</p>
+    </div>
+  </div>
+  <div>
+    <p>
+      <button class="box" v-on:click="favoriteFighter()">Favorite</button>
+    </p>
   </div>
   <p>
-    <button v-on:click="favoriteFighter()">Favorite</button>
-  </p>
-  <p>
-    <button>
+    <button class="back">
       <router-link to="/fighters">Back</router-link>
     </button>
   </p>
 </template>
 
-<style></style>
+<style>
+.name {
+  margin-top: 50px;
+  margin-left: 250px;
+  margin-right: 250px;
+}
+.box {
+  background-color: rgb(250, 5, 5);
+  color: rgb(255, 255, 255);
+}
+.back {
+  background-color: rgb(255, 255, 255);
+}
+.boxed {
+  color: rgb(0, 0, 0);
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 500px;
+  margin-right: 500px;
+  background-color: rgb(255, 255, 255);
+}
+</style>

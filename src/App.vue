@@ -1,39 +1,61 @@
+<script>
+export default {
+  data: function () {
+    return {
+      isLoggedIn: false,
+      flashMessage: "",
+    };
+  },
+  watch: {
+    $route: function () {
+      this.isLoggedIn = !!localStorage.jwt;
+      this.flashMessage = localStorage.getItem("flashMessage");
+      localStorage.removeItem("flashMessage");
+    },
+  },
+  methods: {
+    getUserId: function () {
+      return localStorage.getItem("user_id");
+    },
+  },
+};
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Events</router-link>
-    |
-    <router-link to="/Fighters">Fighters</router-link>
-    |
-    <router-link to="/users/:id">Profile</router-link>
-    |
-    <router-link to="/signup">Signup</router-link>
-    |
-    <router-link to="/login">Login</router-link>
-    |
-    <router-link to="/logout">Logout</router-link>
-  </nav>
+  <div v-if="flashMessage" class="alert alert-success" v-on:click="flashMessage = null">{{ flashMessage }}</div>
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/">Fight Night Tracker</a></h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/events">Events</a></li>
+          <li><a class="nav-link scrollto" href="/fighters">Fighters</a></li>
+          <li><a class="nav-link scrollto" href="/users/:id">Profile</a></li>
+          <li class="dropdown">
+            <a href="#">
+              <span>Signup</span>
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul>
+              <li><a href="/signup">Signup</a></li>
+              <li class="dropdown"></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+
   <router-view />
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  background-color: rgb(233, 233, 233);
 }
 </style>

@@ -22,7 +22,45 @@ export default {
 </script>
 
 <template>
-  <div class="home">
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-title">
+        <span>Fighters</span>
+        <h2>Fighters</h2>
+        <h4>List of current active fighters</h4>
+      </div>
+
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-6 d-flex align-items-stretch"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          v-for="fighter in fighters"
+          v-bind:key="fighter.id"
+        >
+          <div class="icon-box">
+            <div class="icon"><i class="bx bx-star"></i></div>
+            <h4>
+              {{ fighter.name }}
+            </h4>
+            <a v-bind:href="`/fighters/${fighter.id}`"><img :src="fighter.image" v-bind:alt="fighter.name" /></a>
+            <div class="text1">
+              <h5>Age: {{ fighter.age }}</h5>
+              <h5>Height: {{ fighter.height }}</h5>
+              <h5>Weight: {{ fighter.weight }}</h5>
+              <h5>Reach: {{ fighter.reach }}</h5>
+              <h5>Stance: {{ fighter.stance }}</h5>
+              <h5>Win: {{ fighter.win }}</h5>
+              <h5>Loss: {{ fighter.loss }}</h5>
+              <h5>Draw: {{ fighter.draw }}</h5>
+              <h5>Organization: {{ fighter.organization }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <div class="home">
     <div v-for="fighter in fighters" v-bind:key="fighter.id">
       <img :src="fighter.image" v-bind:alt="fighter.name" />
       <p>{{ fighter.name }}</p>
@@ -41,7 +79,12 @@ export default {
         </button>
       </p>
     </div>
-  </div>
+  </div> -->
 </template>
 
-<style></style>
+<style>
+.text1 {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+</style>

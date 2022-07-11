@@ -20,38 +20,73 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
+    isError: function () {
+      if (
+        this.newUserParams.password?.length < 6 ||
+        this.newUserParams.password?.length > 20 ||
+        this.newUserParams.password !== this.newUserParams.password_confirmation ||
+        this.newUserParams.name?.length > 20
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>
 
 <template>
   <div class="signup">
+    <div class="header">
+      <h2>Signup</h2>
+    </div>
     <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
-      <div>
+      <div class="text1">
         <label>Name:</label>
         <input type="text" v-model="newUserParams.name" />
+        <p v-if="newUserParams.name">
+          <small class="text-danger">Must be at least 2 characters</small>
+        </p>
       </div>
-      <div>
+      <div class="text1">
         <label>Email:</label>
         <input type="email" v-model="newUserParams.email" />
+        <p v-if="newUserParams.email">
+          <small class="text-danger">Must be valid and contains "@"</small>
+        </p>
       </div>
-      <div>
-        <label>Timezone:</label>
-        <input type="timezone" v-model="newUserParams.timezone" />
-      </div>
-      <div>
+      <div class="text1">
         <label>Password:</label>
         <input type="password" v-model="newUserParams.password" />
+        <p v-if="newUserParams.password && newUserParams.password.length < 6">
+          <small class="text-danger">
+            Password must be at least 6 characters
+            <p>{{ 6 - newUserParams.password.length }} characters remaining</p>
+          </small>
+        </p>
+        <p v-if="newUserParams.password && newUserParams.password.length > 20">
+          <small class="text-danger">Cannot exceed 20 characters</small>
+        </p>
       </div>
-      <div>
+      <div class="text1">
         <label>Password confirmation:</label>
         <input type="password" v-model="newUserParams.password_confirmation" />
+        <p v-if="newUserParams.password && newUserParams.password !== newUserParams.password_confirmation">
+          <small class="text-danger">Must match password</small>
+        </p>
       </div>
-      <input type="submit" value="Submit" />
+      <div class="text1">
+        <input type="submit" value="Submit" v-bind:disabled="isError()" />
+      </div>
     </form>
   </div>
 </template>
+<style>
+.header {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+</style>
