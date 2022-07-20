@@ -20,7 +20,7 @@ export default {
         .post("/selected_events.json", params)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/");
+          this.$router.push("/events");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

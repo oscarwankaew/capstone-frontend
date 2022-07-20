@@ -47,15 +47,30 @@ export default {
       <div class="text1">
         <label>Name:</label>
         <input type="text" v-model="newUserParams.name" />
-        <p v-if="newUserParams.name">
+        <p v-if="newUserParams.name && newUserParams.name.length < 2">
           <small class="text-danger">Must be at least 2 characters</small>
+        </p>
+      </div>
+      <div class="text1">
+        <label>Timezone:</label>
+        <input type="text" v-model="newUserParams.timezone" />
+        <p
+          v-if="
+            newUserParams.timezone &&
+            !newUserParams.timezone.includes(`PT`) &&
+            !newUserParams.timezone.includes(`MT`) &&
+            !newUserParams.timezone.includes(`CT`) &&
+            !newUserParams.timezone.includes(`ET`)
+          "
+        >
+          <small class="text-danger">Must use PT, MT, CT, ET</small>
         </p>
       </div>
       <div class="text1">
         <label>Email:</label>
         <input type="email" v-model="newUserParams.email" />
-        <p v-if="newUserParams.email">
-          <small class="text-danger">Must be valid and contains "@"</small>
+        <p v-if="newUserParams.email && !newUserParams.email.includes(`@`) && !newUserParams.email.includes(`.com`)">
+          <small class="text-danger">Must be valid and contains "@". and ".com"</small>
         </p>
       </div>
       <div class="text1">

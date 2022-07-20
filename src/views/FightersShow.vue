@@ -78,8 +78,8 @@ export default {
   color: rgb(0, 0, 0);
   margin-bottom: 50px;
   margin-top: 50px;
-  margin-left: 500px;
-  margin-right: 500px;
+  margin-left: 300px;
+  margin-right: 300px;
   background-color: rgb(255, 255, 255);
 }
 </style>

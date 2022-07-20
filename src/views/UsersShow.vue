@@ -1,11 +1,14 @@
 <script>
 import axios from "axios";
-// import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
+import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
 
 export default {
   data: function () {
     return {
       user: {},
+      startTime: [],
+      timezone: [],
+      selected_event: [],
     };
   },
   created: function () {
@@ -14,6 +17,9 @@ export default {
       console.log("Show user", response.data);
     });
   },
+  // mounted: function () {
+  //   this.showTime();
+  // },
   methods: {
     getUserId: function () {
       return localStorage.getItem("user_id");
@@ -30,10 +36,32 @@ export default {
         this.$router.go();
       });
     },
-    // showTime: function () {
-    //   const m = moment().tz("America/Los_Angeles").format();
-    //   console.log(m.toString());
-    // },
+    showTime: function () {
+      switch (this.user.timezone) {
+        case "PT":
+          this.timezone = "US/Pacific";
+          break;
+        case "CT":
+          this.timezone = "US/Central";
+          break;
+        case "ET":
+          this.timezone = "US/Eastern";
+          break;
+        case "MT":
+          this.timezone = "US/Mountain";
+          break;
+      }
+      var time = moment.tz(
+        this.user.selected_events[0].event.time_format,
+        this.user.selected_events[0].event.timezone_format
+      );
+      // var time = moment.tz("2022-07-02 19:00", "US/Pacific");
+      // console.log(time.toString());
+      var currentTimezone = time.clone().tz(this.timezone).format("LT");
+      console.log(time.clone().tz(this.timezone));
+      this.startTime.push(currentTimezone);
+      console.log(currentTimezone.toString());
+    },
   },
 };
 </script>
@@ -54,12 +82,17 @@ export default {
   </div>
 
   <div v-for="selected_event in user.selected_events" v-bind:key="selected_event.id">
-    <img :src="selected_event.event.event_image" v-bind:alt="selected_event.event.title" />
-    <div class="text1">
+    <img :src="selected_event.event.event_image" v-bind:alt="selected_event.event.title" class="img-fluid" />
+
+    <div class="boxed">
       <h4>{{ selected_event.event.title }}</h4>
       <h4>{{ selected_event.event.date }}</h4>
       <h4>{{ selected_event.event.time }}</h4>
       <h4>{{ selected_event.event.location }}</h4>
+      <h4>Starting in your timezone time: {{ startTime }}</h4>
+      <p>
+        <button v-on:click="showTime()">Show starting time</button>
+      </p>
       <p>
         <button v-on:click="removeEvent(selected_event.id)">Remove</button>
       </p>
@@ -86,14 +119,6 @@ export default {
       <button v-on:click="unFavorite(favorite_fighter.id)">Unfavorite</button>
     </p>
   </div>
-  <p>
-    <button>
-      <router-link to="/">Home</router-link>
-    </button>
-  </p>
-  <!-- <p>
-    <button v-on:click="showTime()">click</button>
-  </p> -->
 </template>
 
 <style></style>
