@@ -1,6 +1,9 @@
 {
   "name": "capstone-frontend",
   "version": "0.1.0",
+  "engines": {
+    "npm": "6.x"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
