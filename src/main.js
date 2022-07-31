@@ -9,7 +9,7 @@ const app = createApp(App);
 
 app.config.globalProperties.$moment = moment;
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "https://fight-night-tracker.herokuapp.com" : "/";
 
 var jwt = localStorage.getItem("jwt");
 if (jwt) {
