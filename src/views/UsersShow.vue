@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable */
 import axios from "axios";
 import moment from "moment-timezone/builds/moment-timezone-with-data-2012-2022";
 
