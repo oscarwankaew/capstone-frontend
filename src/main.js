@@ -12,7 +12,7 @@ app.config.globalProperties.$moment = moment;
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development"
-    ? "https://localhost:3000"
+    ? "https://fight-night-tracker-backend.herokuapp.com"
     : "https://fight-night-tracker-backend.herokuapp.com";
 
 var jwt = localStorage.getItem("jwt");
